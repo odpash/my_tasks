@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Книжка",
+      "description": "То как я стал геем",
+      "start_time": "10:00",
+      "finish_time": "12:00",
+      "is_completed": false,
+      "creation_date": "15.10.2022"
+    },
+    {
+      "id": 2,
+      "name": "Пернуть",
+      "description": "То как я стал геем",
+      "start_time": "12:00",
+      "finish_time": "14:00",
+      "is_completed": false,
+      "creation_date": "15.10.2022"
+    }
+  ],
+  "for_what_date": "16.10.2022"
+}
