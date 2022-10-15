@@ -34,7 +34,7 @@ def load_storage_preview() -> StoragePreview:
 
 
 def _read_from_file(tasks_id: int) -> str | None:
-    file_path = f"storage/{tasks_id}.json"
+    file_path = f"/Users/olegpash/Developer/october2022/my_tasks/storage/{tasks_id}.json"
     if Path(file_path).is_file():
         file = open(file=file_path, mode='r', encoding='UTF-8')
         data = file.read()
