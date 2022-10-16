@@ -29,7 +29,9 @@ def print_hi_error_message() -> str:
     return print_hi_message()
 
 
-def format_tasks(tasks: Tasks) -> str:  # in future add uncompleted task retriever for the current day
+def format_tasks(
+        tasks: Tasks,
+) -> str:  # in future add uncompleted task retriever for the current day
     message = f"%SEPARATOR%\n| Группа задач №{tasks.id}\n| Задачи на {tasks.for_what_date.to_string()}\n%SEPARATOR%"
     max_length = 0
     for t in tasks.tasks:
@@ -40,14 +42,14 @@ def format_tasks(tasks: Tasks) -> str:  # in future add uncompleted task retriev
         if max_length < max_l:
             max_length = max_l
         message += part_1 + part_2 + part_3 + "%SEPARATOR%"
-    message = message.replace("%SEPARATOR%", '+' + (max_length - 1) * '-' + '+')
+    message = message.replace("%SEPARATOR%", "+" + (max_length - 1) * "-" + "+")
 
-    new_message = ''
-    for line in message.split('\n'):
-        if line[-1] != '+':
-            new_message = new_message + line + (max_length - len(line)) * ' ' + "|\n"
+    new_message = ""
+    for line in message.split("\n"):
+        if line[-1] != "+":
+            new_message = new_message + line + (max_length - len(line)) * " " + "|\n"
         else:
-            new_message = new_message + line + '\n'
+            new_message = new_message + line + "\n"
     return new_message
 
 

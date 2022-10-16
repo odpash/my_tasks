@@ -27,16 +27,22 @@ def load_storage_preview() -> StoragePreview:
         index += 1
         task = read_tasks_by_id(index)
         if task:
-            data.append(FileObj(id=task.id, filename=f"{index}.json", created_for=task.for_what_date))
+            data.append(
+                FileObj(
+                    id=task.id, filename=f"{index}.json", created_for=task.for_what_date
+                )
+            )
         else:
             break
     return StoragePreview(data)
 
 
 def _read_from_file(tasks_id: int) -> str | None:
-    file_path = f"/Users/olegpash/Developer/october2022/my_tasks/storage/{tasks_id}.json"
+    file_path = (
+        f"/Users/olegpash/Developer/october2022/my_tasks/storage/{tasks_id}.json"
+    )
     if Path(file_path).is_file():
-        file = open(file=file_path, mode='r', encoding='UTF-8')
+        file = open(file=file_path, mode="r", encoding="UTF-8")
         data = file.read()
         file.close()
         return data
@@ -47,34 +53,49 @@ def _parse_data_from_file(data: str) -> Tasks:
     try:
         js_data = json.loads(data)
         tasks_list = []
-        for js_task in js_data['tasks']:
-            tasks_list.append(Task(
-                id=js_task['id'],
-                name=js_task['name'],
-                description=js_task['description'],
-                start_time=TimeFormat(
-                    hours=int(js_task['start_time'].split(TimeFormat.separator)[0]),
-                    minutes=int(js_task['start_time'].split(TimeFormat.separator)[1])
-                ),
-                finish_time=TimeFormat(
-                    hours=int(js_task['finish_time'].split(TimeFormat.separator)[0]),
-                    minutes=int(js_task['finish_time'].split(TimeFormat.separator)[1])
-                ),
-                is_completed=js_task['is_completed'],
-                creation_date=DateFormat(
-                    day=int(js_task['creation_date'].split(DateFormat.separator)[0]),
-                    month=int(js_task['creation_date'].split(DateFormat.separator)[1]),
-                    year=int(js_task['creation_date'].split(DateFormat.separator)[2])
+        for js_task in js_data["tasks"]:
+            tasks_list.append(
+                Task(
+                    id=js_task["id"],
+                    name=js_task["name"],
+                    description=js_task["description"],
+                    start_time=TimeFormat(
+                        hours=int(js_task["start_time"].split(TimeFormat.separator)[0]),
+                        minutes=int(
+                            js_task["start_time"].split(TimeFormat.separator)[1]
+                        ),
+                    ),
+                    finish_time=TimeFormat(
+                        hours=int(
+                            js_task["finish_time"].split(TimeFormat.separator)[0]
+                        ),
+                        minutes=int(
+                            js_task["finish_time"].split(TimeFormat.separator)[1]
+                        ),
+                    ),
+                    is_completed=js_task["is_completed"],
+                    creation_date=DateFormat(
+                        day=int(
+                            js_task["creation_date"].split(DateFormat.separator)[0]
+                        ),
+                        month=int(
+                            js_task["creation_date"].split(DateFormat.separator)[1]
+                        ),
+                        year=int(
+                            js_task["creation_date"].split(DateFormat.separator)[2]
+                        ),
+                    ),
                 )
-            ))
+            )
         return Tasks(
-            id=js_data['id'],
+            id=js_data["id"],
             tasks=tasks_list,
             for_what_date=DateFormat(
-                day=int(js_data['for_what_date'].split(DateFormat.separator)[0]),
-                month=int(js_data['for_what_date'].split(DateFormat.separator)[1]),
-                year=int(js_data['for_what_date'].split(DateFormat.separator)[2]),
-            ))
+                day=int(js_data["for_what_date"].split(DateFormat.separator)[0]),
+                month=int(js_data["for_what_date"].split(DateFormat.separator)[1]),
+                year=int(js_data["for_what_date"].split(DateFormat.separator)[2]),
+            ),
+        )
     except Exception:
         print("err")
 

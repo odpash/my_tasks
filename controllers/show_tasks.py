@@ -1,6 +1,7 @@
 import datetime
-from tasks_storage import DateFormat, load_storage_preview, read_tasks_by_id
+
 from printer import format_tasks, print_today_tasks
+from tasks_storage import DateFormat, load_storage_preview, read_tasks_by_id
 
 
 def today():

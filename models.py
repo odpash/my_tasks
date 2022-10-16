@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 def format_time_value(v: int) -> str:
     if len(str(v)) == 1:
-        return '0' + str(v)
+        return "0" + str(v)
     else:
         return str(v)
 
@@ -26,8 +26,10 @@ class DateFormat:
     year: int
 
     def to_string(self) -> str:
-        return f"{format_time_value(self.day)}{self.separator}" \
-               f"{format_time_value(self.month)}{self.separator}{self.year}"
+        return (
+            f"{format_time_value(self.day)}{self.separator}"
+            f"{format_time_value(self.month)}{self.separator}{self.year}"
+        )
 
 
 @dataclass(frozen=True)
